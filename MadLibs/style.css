@@ -55,3 +55,8 @@
 input {
 	margin: 10px !important;
 }
+
+.submit {
+	margin: 20px !important;
+	float: right;
+}
