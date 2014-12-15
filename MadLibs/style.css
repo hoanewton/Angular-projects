@@ -60,3 +60,11 @@ input {
 	margin: 20px !important;
 	float: right;
 }
+
+.message {
+	margin-top: 20px;
+}
+
+.error {
+	color: red;
+}

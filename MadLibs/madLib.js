@@ -1,42 +1,17 @@
 angular.module('madLib', ['ngMessages'])
    .controller('MadLibCtrl', function($scope) {
-   	
-        // $scope.$on('displayData', function(event, data) {
-        //     $scope.content = data;
-        // });
-    })
+   		$scope.submit = function(){ 
 
-   // .controller('MultiplicationCtrl', function($scope, $attrs, $rootScope) {
-   //    function polulateNumbers (x) {
-   //    	var numbers = [];
-   //    	for (var i=0; i<x; i++) {
-   //    		numbers[i] = i+1;
-   //    	};
-   //    	return numbers;
-   //    }
+   			console.log($scope.data); 
+   			console.log($scope.madLibForm); 
 
-   //    $scope.compute = function(a, b) {
-   //          return a * b;
-   //    };
-   //    $scope.$watch('numberLimit', function(limit) {
-   //       $scope.numbers = polulateNumbers(limit);
-   //    });
-   //    $scope.numberLimit = $attrs.initialNumberLimit || 10;
+	   		if( $scope.madLibForm.$valid ) {
+	   		 console.log('The form is valid'); 
+	   		} else {
+	   		 console.log('The form is invalid'); 
+	   		}
 
-   //    var activeFactorA, activeFactorB;
-   //    $scope.setActiveFactors = function(a, b) {
-   //       activeFactorA = a;
-   //       activeFactorB = b;
-   //    };
-   //    $scope.matchesFactor = function (a, b) {
-   //       return a === activeFactorA || b === activeFactorB;
-   //    };
+   		}
+    });
 
-   //    $scope.clearActiveFactors = function() {
-   //       activeFactorA = activeFactorB = null;
-   //    };
 
-   //    $scope.setActiveNumber = function(number) {
-   //      $rootScope.$broadcast('displayData', number);
-   //    };
- // });

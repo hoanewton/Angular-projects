@@ -18,29 +18,64 @@
 				</div>
 			</div>
 
-			<div class="col-md-12 words-container">
+			<div ng-show="madLibForm.$submitted &&  madLibForm.$invalid" ng-hide="madLibForm.$submitted && madLibForm.$valid"  class="col-md-12 words-container">
 				<h3>Provide the following words: </h3>
+
 				<form name="madLibForm" novalidate ng-submit="submit()">
 					<input ng-model="data.name" type='text' name='name' required placeholder="name">
+		
+						<span  ng-if="madLibForm.$submitted && madLibForm.name.$error.required" ng-messages="madLibForm.$MadLibCtrl.$error" class="error"> Name field is required! </span>
+					
+
 					<input ng-model="data.jobTitle" type='text' name='jobTitle' required placeholder="job title">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.jobTitle.$error.required' ng-messages="madLibForm.jobTitle.$error.required"> Job title is required! </span>
+
 					<input ng-model="data.tediousTask" type='text' name='tediousTask' required placeholder="tedious task">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.tediousTask.$error.required' ng-messages="madLibForm.tediousTask.$error.required"> Tedious task is required! </span>
+
 					<input ng-model="data.dirtyTask" type='text' name='dirtyTask' required placeholder="dirty task">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.dirtyTask.$error.required' ng-messages="madLibForm.dirtyTask.$error.required">required! </span>
+
 					<input ng-model="data.celebrity" type='text' name='celebrity' required placeholder="celebrity">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.celebrity.$error.required' ng-messages="madLibForm.celebrity.$error.required">required! </span>
+
+
 					<input ng-model="data.uselessSkill" type='text' name='uselessSkill' required placeholder="useless skill">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.uselessSkill.$error.required' ng-messages="madLibForm.uselessSkill.$error.required">required! </span>
+
 					<input ng-model="data.adjective" type='text' name='adjective' required placeholder="adjective">
-					<input ng-model="data.obnoxiuousCelberity" type='text' name='obnoxiuousCelberity' required placeholder="obnoxiuous celberity">
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.adjective.$error.required' ng-messages="madLibForm.adjective.$error.required">required! </span>
+
+					<input ng-model="data.obnoxiousCelebrity" type='text' name='obnoxiousCelebrity' required placeholder="obnoxiuous celberity">	
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.obnoxiousCelebrity.$error.required' ng-messages="madLibForm.obnoxiousCelebrity.$error.required">required! </span>
+
 					<input ng-model="data.hugeNumber" type='number' name='hugeNumber' required placeholder="huge number">
-					</div>
-					<div class="row">
-						<input class="submit" type="submit" name="submit" value="Generate my Madlib" />
-					</div>	
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.required' ng-messages="madLibForm.hugeNumber.$error.required">required! </span>
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.number' ng-messages="madLibForm.hugeNumber.$error.number">Not a number!</span>
+
+					<input class="submit" type="submit" name="submit" value="Generate my Madlib"/><br>
+
+					<!-- <pre>madLibForm.name.$error = {{ madLibForm.name.$error | json }}</pre>
+					<pre>madLibForm.jobTitle.$error = {{ madLibForm.jobTitle.$error | json }}</pre>
+					<pre>madLibForm.tediousTask.$error = {{ madLibForm.tediousTask.$error | json }}</pre>
+					<pre>madLibForm.dirtyTask.$error = {{ madLibForm.dirtyTask.$error | json }}</pre>
+					<pre>madLibForm.celebrity.$error = {{ madLibForm.celebrity.$error | json }}</pre>
+					<pre>madLibForm.uselessSkill.$error = {{ madLibForm.uselessSkill.$error | json }}</pre>
+					<pre>madLibForm.adjective.$error = {{ madLibForm.adjective.$error | json }}</pre>
+					<pre>madLibForm.obnoxiousCelebrity.$error = {{ madLibForm.obnoxiousCelebrity.$error | json }}</pre>
+					<pre>madLibForm.hugeNumber.$error = {{ madLibForm.hugeNumber.$error | json }}</pre> -->
 				</form>
-			<div class="col-md-12 paragraph-container">
+			</div>
+
+			<div ng-show="madLibForm.$submitted && madLibForm.$valid" ng-hide="madLibForm.$pristine || madLibForm.$invalid" class="col-md-12 paragraph-container">
 				<h4 class="paragraph">
 				<strong>{{data.name}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although she loved parts of her job, she absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with her life mentor <strong>{{data.celebrity}}</strong> who told her to learn how to <strong>{{data.uselessSkill}}</strong> with Thinkful. Thinkful didn't offer a course on <strong>{{data.uselessSkill}}</strong> so she studied programming instead. 
  
-				What a great decision! With her new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiuousCelbertity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
+				What a great decision! With her new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiousCelebrity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
 				</h4>
+
+				<button class='submit'>Reset my MadLib</button>
+
 			</div>
 
 	</div>
@@ -50,7 +85,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-messages.min.js'></script>
 <script type="text/javascript" src='madLib.js'></script>
+<script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-messages.min.js'></script> <!-- This must be after madLib.js -->
 </body>
 </html>
