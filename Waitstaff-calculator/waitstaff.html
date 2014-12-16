@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>Waitstaff Calculator</title>
+	<link rel="stylesheet" type="text/css" href="waitstaff.css">
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body ng-app="">
+	<div class="wrapper">
+	<h1>Waitstaff Calculator</h1>
+		
+		<form name='waitstaffForm' novalidate ng-submit="submit()" class="meal-details">
+			<div class="headings">Enter the Meal Details</div>
+			<div class="row">
+				<span class="pull-left details">Base Meal Price: $</span>
+				<input  ng-model="data.mealPrice" type='number' name='mealPrice' placeholder="0.00" class="left"></input>
+			</div>
+			<div class="row">
+				<span class="pull-left details">Tax Rate: %</span>
+				<input  ng-model="data.taxRate" type='number' name='taxRate' placeholder="20.00"  placeholder="0.00" class="left"></input>
+			</div>
+			<div class="row">
+				<span class="pull-left details">Tip Percentage: %</span>
+				<input placeholder="0.00" class="left"></input>
+			</div>
+			<div class="row">
+				<button class="pull-left">Submit</button>
+				<button>Cancel</button>
+			</div>
+
+		</form>
+
+		<div class="calculator">
+			<div class="customer-charges">
+				<div class="headings">Customer Charges</div>
+				<div class="row">
+					<span class="pull-left charges">Subtotal </span>
+					<span placeholder="0.00" class="left"/>{{data.mealPrice}}</span>
+				</div>
+				<div class="row">
+					<span class="pull-left charges">Tax </span>
+					<span placeholder="0.00" class="left"/>{{calculateTax( data.mealPrice, data.taxRate )}}</span>
+				</div>
+				<div class="row">
+					<span class="pull-left charges">Total</span>
+					<span placeholder="0.00" class="left"/></span>
+				</div>
+			</div>
+
+			<div class="my-earning">
+				<div class="headings">My earning</div>
+				<div class="row">
+					<span class="pull-left earning">Tip total</span>
+					<span class="left"></span>
+				</div>
+				<div class="row">
+					<span class="pull-left earning">Meal count</span>
+					<span class="left"></span>
+				</div>
+				<div class="row">
+					<span class="pull-left earning">Average tip per meal</span>
+					<span class="left"></span>
+				</div>
+			</div>
+		</div>
+		<button class="reset btn btn-default">Reset</button>
+	</div>
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src='waitstaff.js'></script>
+<script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-messages.min.js'></script> <!-- This must be after waitstaff.js -->
+</body>
+</html>
