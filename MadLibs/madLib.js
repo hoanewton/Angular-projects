@@ -18,12 +18,17 @@ angular.module('madLib', ['ngMessages'])
 
    		$scope.switchViews = function() {
    			console.log('Trying to switch Views here. Damn it!')
-   			$scope.personName = "";
-   			$scope.jobTitle = "";
-   			$scope.tediousTask = "";
-   			$scope.dirtyTask = "";
-   			$scope.celebrity = "";
-
+   			$scope.data.personName = "";
+   			$scope.data.jobTitle = "";
+   			$scope.data.tediousTask = "";
+   			$scope.data.dirtyTask = "";
+   			$scope.data.uselessSkill = "";
+   			$scope.data.celebrity = "";
+   			$scope.data.adjective = "";
+   			$scope.data.obnoxiousCelebrity = "";
+   			$scope.data.hugeNumber = "";
+   			$scope.madLibForm.$submitted = false;
+   			
    			$('.words-container').show();
 	   		$('.paragraph-container').hide(); 
    		}
