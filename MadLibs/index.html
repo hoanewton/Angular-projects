@@ -4,8 +4,8 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
-<body ng-app="">
-	<div class="wrapper">
+<body ng-app="madLib">
+	<div class="wrapper" ng-controller="MadLibCtrl">
 		
 			<div class="header">
 				<div class="pull-left">
@@ -18,13 +18,13 @@
 				</div>
 			</div>
 
-			<div ng-show="madLibForm.$submitted &&  madLibForm.$invalid" ng-hide="madLibForm.$submitted && madLibForm.$valid"  class="col-md-12 words-container">
+			<div class="col-md-12 words-container">
 				<h3>Provide the following words: </h3>
 
 				<form name="madLibForm" novalidate ng-submit="submit()">
-					<input ng-model="data.name" type='text' name='name' required placeholder="name">
+					<input ng-model="data.personName" type='text' name='personName' required placeholder="personName">
 		
-						<span  ng-if="madLibForm.$submitted && madLibForm.name.$error.required" ng-messages="madLibForm.$MadLibCtrl.$error" class="error"> Name field is required! </span>
+						<span  ng-if="madLibForm.$submitted && madLibForm.personName.$error.required" ng-messages="madLibForm.$MadLibCtrl.$error" class="error"> Name field is required! </span>
 					
 
 					<input ng-model="data.jobTitle" type='text' name='jobTitle' required placeholder="job title">
@@ -53,7 +53,7 @@
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.required' ng-messages="madLibForm.hugeNumber.$error.required">required! </span>
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.number' ng-messages="madLibForm.hugeNumber.$error.number">Not a number!</span>
 
-					<input class="submit" type="submit" name="submit" value="Generate my Madlib"/><br>
+					<input type="submit" class="submit" value="Generate my Madlib"/><br>
 
 					<!-- <pre>madLibForm.name.$error = {{ madLibForm.name.$error | json }}</pre>
 					<pre>madLibForm.jobTitle.$error = {{ madLibForm.jobTitle.$error | json }}</pre>
@@ -67,14 +67,14 @@
 				</form>
 			</div>
 
-			<div ng-show="madLibForm.$submitted && madLibForm.$valid" ng-hide="madLibForm.$pristine || madLibForm.$invalid" class="col-md-12 paragraph-container">
+			<div ng-show="madLibForm.$submitted && madLibForm.$valid" class="col-md-12 paragraph-container">
 				<h4 class="paragraph">
 				<strong>{{data.name}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although she loved parts of her job, she absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with her life mentor <strong>{{data.celebrity}}</strong> who told her to learn how to <strong>{{data.uselessSkill}}</strong> with Thinkful. Thinkful didn't offer a course on <strong>{{data.uselessSkill}}</strong> so she studied programming instead. 
  
 				What a great decision! With her new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiousCelebrity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
 				</h4>
 
-				<button class='submit'>Reset my MadLib</button>
+				<button type="submit" class='submit' ng-click="switchViews()">Reset my MadLib</button>
 
 			</div>
 

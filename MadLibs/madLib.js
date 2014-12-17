@@ -1,17 +1,33 @@
 angular.module('madLib', ['ngMessages'])
-   .controller('MadLibCtrl', function($scope) {
+   .controller('MadLibCtrl', ['$scope', function($scope) {
    		$scope.submit = function(){ 
-
-   			console.log($scope.data); 
-   			console.log($scope.madLibForm); 
-
 	   		if( $scope.madLibForm.$valid ) {
 	   		 console.log('The form is valid'); 
-	   		} else {
-	   		 console.log('The form is invalid'); 
-	   		}
 
+	   		 $('.words-container').hide();
+	   		 $('.paragraph-container').show();
+	   		} else {
+   			 console.log(madLibForm.$error);
+	   		 console.log('The form is invalid');
+
+	   		 $('.words-container').show();
+	   		 $('.paragraph-container').hide(); 
+
+	   		}
+   		},
+
+   		$scope.switchViews = function() {
+   			console.log('Trying to switch Views here. Damn it!')
+   			$scope.personName = "";
+   			$scope.jobTitle = "";
+   			$scope.tediousTask = "";
+   			$scope.dirtyTask = "";
+   			$scope.celebrity = "";
+
+   			$('.words-container').show();
+	   		$('.paragraph-container').hide(); 
    		}
-    });
+
+    }]);
 
 
