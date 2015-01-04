@@ -1,10 +1,36 @@
-angular.module('waitstaff', [])
-   .controller('WaitstaffCtrl', function($scope) {
+angular.module('waitstaff', ['ngMessages'])
+   .controller('WaitstaffCtrl', ['$scope', function($scope) {
 
-   		$scope.calculateTax = function(price, taxPercentage) {
-   			return price * taxPercentage;
+   		var price;
+   		var taxAmount;
+   		var tipAmount;
+   		var subTotal;
+   		var tipTotal = 0;
+   		var mealCount;
+
+   		$scope.taxAmount = function(price, taxPercentage) {
+   			return price * taxPercentage / 100;
+   		},
+
+   		$scope.tipAmount = function(price, tipPercentage) {
+   			return tipAmount = price * tipPercentage / 100;
+   		},
+
+   		$scope.subTotal = function(price, taxPercentage) {
+   			return subTotal = ((price * taxPercentage / 100) + price);
+   		},
+
+   		$scope.total = function() {
+   			return subTotal + tipAmount;
+   		},
+
+   		$scope.tipTotal = function() {
+   			return tipTotal = tipTotal + tipAmount;
    		}
-    })
+
+
+
+  }]);
       // $scope.$on('displayData', function(event, data) {
       //     $scope.content = data;
       // });

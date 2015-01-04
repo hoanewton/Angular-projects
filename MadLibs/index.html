@@ -21,12 +21,11 @@
 			<div class="col-md-12 words-container" ng-show="madLibForm.$pristine || madLibForm.$invalid" ng-hide="madLibForm.$submitted && madLibForm.$valid">
 				<h3>Provide the following words: </h3>
 
-				<form name="madLibForm" novalidate ng-submit="generate()">
+				<form name="madLibForm" novalidate>
+<!-- 
 					<input ng-model="data.personName" type='text' name='personName' required placeholder="personName">
-		
 						<span  ng-if="madLibForm.$submitted && madLibForm.personName.$error.required" ng-messages="madLibForm.$MadLibCtrl.$error" class="error"> Name field is required! </span>
 					
-
 					<input ng-model="data.jobTitle" type='text' name='jobTitle' required placeholder="job title">
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.jobTitle.$error.required' ng-messages="madLibForm.jobTitle.$error.required"> Job title is required! </span>
 
@@ -47,23 +46,14 @@
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.adjective.$error.required' ng-messages="madLibForm.adjective.$error.required">required! </span>
 
 					<input ng-model="data.obnoxiousCelebrity" type='text' name='obnoxiousCelebrity' required placeholder="obnoxiuous celberity">	
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.obnoxiousCelebrity.$error.required' ng-messages="madLibForm.obnoxiousCelebrity.$error.required">required! </span>
+						<span class="error" ng-if='madLibForm.$submitted && madLibForm.obnoxiousCelebrity.$error.required' ng-messages="madLibForm.obnoxiousCelebrity.$error.required">required! </span> -->
 
 					<input ng-model="data.hugeNumber" type='number' name='hugeNumber' required placeholder="huge number">
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.required' ng-messages="madLibForm.hugeNumber.$error.required">required! </span>
 						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.number' ng-messages="madLibForm.hugeNumber.$error.number">Not a number!</span>
 
-					<input type="submit" name="submit" class="submit" value="Generate my Madlib"/><br>
+					<input type="submit" class="submit" value="Generate my Madlib" ng-click="generate(madLibForm)"/><br>
 
-					<!-- <pre>madLibForm.name.$error = {{ madLibForm.name.$error | json }}</pre>
-					<pre>madLibForm.jobTitle.$error = {{ madLibForm.jobTitle.$error | json }}</pre>
-					<pre>madLibForm.tediousTask.$error = {{ madLibForm.tediousTask.$error | json }}</pre>
-					<pre>madLibForm.dirtyTask.$error = {{ madLibForm.dirtyTask.$error | json }}</pre>
-					<pre>madLibForm.celebrity.$error = {{ madLibForm.celebrity.$error | json }}</pre>
-					<pre>madLibForm.uselessSkill.$error = {{ madLibForm.uselessSkill.$error | json }}</pre>
-					<pre>madLibForm.adjective.$error = {{ madLibForm.adjective.$error | json }}</pre>
-					<pre>madLibForm.obnoxiousCelebrity.$error = {{ madLibForm.obnoxiousCelebrity.$error | json }}</pre>
-					<pre>madLibForm.hugeNumber.$error = {{ madLibForm.hugeNumber.$error | json }}</pre> -->
 				</form>
 			</div>
 
@@ -84,7 +74,7 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 <script type="text/javascript" src='madLib.js'></script>
 <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-messages.min.js'></script> <!-- This must be after madLib.js -->
 </body>

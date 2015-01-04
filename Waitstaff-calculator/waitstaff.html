@@ -4,27 +4,33 @@
 	<link rel="stylesheet" type="text/css" href="waitstaff.css">
 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
-<body ng-app="">
-	<div class="wrapper">
+<body ng-app="waitstaff">
+	<div class="wrapper" ng-controller="WaitstaffCtrl">
 	<h1>Waitstaff Calculator</h1>
 		
-		<form name='waitstaffForm' novalidate ng-submit="submit()" class="meal-details">
+		<form name='waitstaffForm' novalidate class="meal-details">
 			<div class="headings">Enter the Meal Details</div>
 			<div class="row">
 				<span class="pull-left details">Base Meal Price: $</span>
 				<input  ng-model="data.mealPrice" type='number' name='mealPrice' placeholder="0.00" class="left"></input>
+				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.number' ng-messages="waitstaffForm.mealPrice.$error.number"> Please enter a number! </span>
 			</div>
+
 			<div class="row">
 				<span class="pull-left details">Tax Rate: %</span>
-				<input  ng-model="data.taxRate" type='number' name='taxRate' placeholder="20.00"  placeholder="0.00" class="left"></input>
+				<input  ng-model="data.taxRate" type='number' name='taxRate' placeholder="8.00"  placeholder="0.00" class="left"></input>
+				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.number' ng-messages="waitstaffForm.taxRate.$error.number"> Please enter a number! </span>
 			</div>
+
 			<div class="row">
 				<span class="pull-left details">Tip Percentage: %</span>
-				<input placeholder="0.00" class="left"></input>
+				<input ng-model="data.tipRate" placeholder="20.00" class="left"></input>
+				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.tipPercentage.$error.number' ng-messages="waitstaffForm.tipPercentage.$error.number"> Please enter a number! </span>
 			</div>
-			<div class="row">
-				<button class="pull-left">Submit</button>
-				<button>Cancel</button>
+
+			<div class="row pull-right">
+				<button class="btn btn-primary pull-left" type="submit"  ng-submit="submit(waitstaffForm)">Submit</button>
+				<button class="btn btn-primary pull-left" type="cancel">Cancel</button>
 			</div>
 
 		</form>
@@ -33,16 +39,16 @@
 			<div class="customer-charges">
 				<div class="headings">Customer Charges</div>
 				<div class="row">
-					<span class="pull-left charges">Subtotal </span>
-					<span placeholder="0.00" class="left"/>{{data.mealPrice}}</span>
+					<span class="pull-left charges">Subtotal: </span>
+					<span placeholder="0.00" class="left"/>{{subTotal(data.mealPrice, data.taxRate)}}</span>
 				</div>
 				<div class="row">
-					<span class="pull-left charges">Tax </span>
-					<span placeholder="0.00" class="left"/>{{calculateTax( data.mealPrice, data.taxRate )}}</span>
+					<span class="pull-left charges">Tip: </span>
+					<span placeholder="0.00" class="left"/>{{ tipAmount( data.mealPrice, data.tipRate )}}</span>
 				</div>
 				<div class="row">
-					<span class="pull-left charges">Total</span>
-					<span placeholder="0.00" class="left"/></span>
+					<span class="pull-left charges">Total:</span>
+					<span placeholder="0.00" class="left"/>{{total()}}</span>
 				</div>
 			</div>
 
@@ -50,11 +56,11 @@
 				<div class="headings">My earning</div>
 				<div class="row">
 					<span class="pull-left earning">Tip total</span>
-					<span class="left"></span>
+					<span class="left">{{tipTotal = 0}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Meal count</span>
-					<span class="left"></span>
+					<span class="left">{{mealCount = 0}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Average tip per meal</span>
@@ -69,7 +75,6 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src='waitstaff.js'></script>
 <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-messages.min.js'></script> <!-- This must be after waitstaff.js -->
 </body>
