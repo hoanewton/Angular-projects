@@ -6,67 +6,103 @@
 </head>
 <body ng-app="madLib">
 	<div class="wrapper" ng-controller="MadLibCtrl">
-		
-			<div class="header">
-				<div class="pull-left">
-					<img class="smiley" src="images/mad-lib-happy-face.png">
-				</div>
 
-				<div class="pull-right logo-container">
-					<img class="logo" src="images/ng-mad-libs-logo.png">
-					<h2 class="slogan">Automate This!</h2>
-				</div>
-			</div>
+    <div class="header">
+      <div class="pull-left">
+        <img class="smiley" src="images/mad-lib-happy-face.png">
+      </div>
 
-			<div class="col-md-12 words-container" ng-show="madLibForm.$pristine || madLibForm.$invalid" ng-hide="madLibForm.$submitted && madLibForm.$valid">
-				<h3>Provide the following words: </h3>
+      <div class="pull-right logo-container">
+        <img class="logo" src="images/ng-mad-libs-logo.png">
+        <h2 class="slogan">Automate This!</h2>
+      </div>
+    </div>
 
-				<form name="madLibForm" novalidate>
-<!-- 
-					<input ng-model="data.personName" type='text' name='personName' required placeholder="personName">
-						<span  ng-if="madLibForm.$submitted && madLibForm.personName.$error.required" ng-messages="madLibForm.$MadLibCtrl.$error" class="error"> Name field is required! </span>
-					
-					<input ng-model="data.jobTitle" type='text' name='jobTitle' required placeholder="job title">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.jobTitle.$error.required' ng-messages="madLibForm.jobTitle.$error.required"> Job title is required! </span>
+    <div class="col-md-12 words-container" ng-show="!formSubmitted">
+      <h3>Provide the following words: </h3>
 
-					<input ng-model="data.tediousTask" type='text' name='tediousTask' required placeholder="tedious task">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.tediousTask.$error.required' ng-messages="madLibForm.tediousTask.$error.required"> Tedious task is required! </span>
+      <form name="madLibForm" novalidate>
 
-					<input ng-model="data.dirtyTask" type='text' name='dirtyTask' required placeholder="dirty task">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.dirtyTask.$error.required' ng-messages="madLibForm.dirtyTask.$error.required">required! </span>
+        <input ng-model="data.personName"
+               type='text'
+               name='personName'
+               placeholder="personName"
+               required>
 
-					<input ng-model="data.celebrity" type='text' name='celebrity' required placeholder="celebrity">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.celebrity.$error.required' ng-messages="madLibForm.celebrity.$error.required">required! </span>
+        <p ng-show="madLibForm.personName.$invalid && formInvalid">
+          Please enter a person name</p>
+
+        <input ng-model="data.jobTitle"
+               type='text' name='jobTitle' 
+               placeholder="job title"
+               required>
+
+        <p ng-show="madLibForm.jobTitle.$invalid && formInvalid">
+          Please enter job title</p>
 
 
-					<input ng-model="data.uselessSkill" type='text' name='uselessSkill' required placeholder="useless skill">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.uselessSkill.$error.required' ng-messages="madLibForm.uselessSkill.$error.required">required! </span>
+        <input ng-model="data.tediousTask" 
+               type='text' 
+               name='tediousTask' 
+               required placeholder="tedious task">
+        <p ng-show="madLibForm.tediousTask.$invalid && formInvalid">
+            Please enter tedious task</p>
 
-					<input ng-model="data.adjective" type='text' name='adjective' required placeholder="adjective">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.adjective.$error.required' ng-messages="madLibForm.adjective.$error.required">required! </span>
+        <input ng-model="data.dirtyTask"
+               type='text' name='dirtyTask'
+               required
+               placeholder="dirty task">
+        <p ng-show="madLibForm.dirtyTask.$invalid && formInvalid">
+            Please enter a dirty task</p>
+        
+        <input ng-model="data.celebrity" 
+               type='text' name='celebrity' 
+               required 
+               placeholder="celebrity">
+        <p ng-show="madLibForm.celebrity.$invalid && formInvalid">
+          Please enter a celebrity</p>
 
-					<input ng-model="data.obnoxiousCelebrity" type='text' name='obnoxiousCelebrity' required placeholder="obnoxiuous celberity">	
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.obnoxiousCelebrity.$error.required' ng-messages="madLibForm.obnoxiousCelebrity.$error.required">required! </span> -->
+        <input ng-model="data.uselessSkill" 
+               type='text' 
+               name='uselessSkill' 
+               required placeholder="useless skill">
+        <p ng-show="madLibForm.uselessSkill.$invalid && formInvalid">
+            Please enter job title</p>
+        
+        <input ng-model="data.adjective"
+               type='text'
+               name='adjective'
+               required
+               placeholder="adjective">
+        
+        <p ng-show="madLibForm.adjective.$invalid && formInvalid">
+            Please enter an adjective</p>
+        
+        <input ng-model="data.hugeNumber"
+               type='number'
+               name='hugeNumber'
+               required 
+               placeholder="huge number">
+        <p ng-show="madLibForm.hugeNumber.$invalid && formInvalid">
+          Please enter a huge number.</p>
 
-					<input ng-model="data.hugeNumber" type='number' name='hugeNumber' required placeholder="huge number">
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.required' ng-messages="madLibForm.hugeNumber.$error.required">required! </span>
-						<span class="error" ng-if='madLibForm.$submitted && madLibForm.hugeNumber.$error.number' ng-messages="madLibForm.hugeNumber.$error.number">Not a number!</span>
+        <button type="submit"
+            class="submit"
+            ng-click="generateMadLib(madLibForm)"/>Generate my MadLib</button><br>
+      
+      </form>
+    </div>
 
-					<input type="submit" class="submit" value="Generate my Madlib" ng-click="generate(madLibForm)"/><br>
+    <div ng-show="formSubmitted" class="col-md-12 paragraph-container">
+      <h4 class="paragraph">
+      <strong>{{data.personName}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although she loved parts of her job, she absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with her life mentor <strong>{{data.celebrity}}</strong> who told her to learn how to <strong>{{data.uselessSkill}}</strong> with Thinkful. Thinkful didn't offer a course on <strong>{{data.uselessSkill}}</strong> so she studied programming instead. 
 
-				</form>
-			</div>
+      What a great decision! With her new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiousCelebrity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
+      </h4>
 
-			<div ng-show="madLibForm.$submitted && madLibForm.$valid" ng-hide="madLibForm.$pristine || madLibForm.$invalid" class="col-md-12 paragraph-container">
-				<h4 class="paragraph">
-				<strong>{{data.personName}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although she loved parts of her job, she absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with her life mentor <strong>{{data.celebrity}}</strong> who told her to learn how to <strong>{{data.uselessSkill}}</strong> with Thinkful. Thinkful didn't offer a course on <strong>{{data.uselessSkill}}</strong> so she studied programming instead. 
- 
-				What a great decision! With her new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiousCelebrity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
-				</h4>
+      <button type="reset" class='submit' ng-click="reset()">Reset my MadLib</button>
 
-				<button type="reset" class='submit' ng-click="madLibForm.$setPristine()">Reset my MadLib</button>
-
-			</div>
+    </div>
 
 	</div>
 

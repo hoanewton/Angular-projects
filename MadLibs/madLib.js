@@ -1,31 +1,22 @@
 angular.module('madLib', ['ngMessages'])
    .controller('MadLibCtrl',['$scope',function($scope) {
-   		$scope.generate = function(form){ 
-	   		
-            $scope.submitted == true;
+     $scope.formInvalid = false;
+     
+   		$scope.generateMadLib = function(form){ 
+        if (madLibForm.$invalid){
+          $scope.formInvalid = true;
+        } else {
+          console.log('hello');
+          $scope.formSubmitted = true;
+        }
+       };
 
-         }
-
-         // $scope.submit = function(form){ 
-         
-         // },
-
-   		// $scope.reset = function() {
-   		// 	console.log('Trying to switch Views here!')
-
-   		// 	// $scope.data.personName = "";
-   		// 	// $scope.data.jobTitle = "";
-   		// 	// $scope.data.tediousTask = "";
-   		// 	// $scope.data.dirtyTask = "";
-   		// 	// $scope.data.uselessSkill = "";
-   		// 	// $scope.data.celebrity = "";
-   		// 	// $scope.data.adjective = "";
-   		// 	// $scope.data.obnoxiousCelebrity = "";
-   		// 	// $scope.data.hugeNumber = "";
-   		// 	$scope.madLibForm.$submitted = false;
-     //        $scope.madLibForm.$setPristine();
-   		// }
-
+   		$scope.reset = function() {
+        $scope.madLibForm.$setPristine();
+        $scope.formSubmitted = false;
+        $scope.data = {};
+   		};
+      
     }]);
 
 // <button class="btn btn-primary" type="reset" ng-click="captchaForm.$setPristine()">Reset</button>
