@@ -3,21 +3,26 @@ angular.module('madLib', ['ngMessages'])
      $scope.formInvalid = false;
      
    		$scope.generateMadLib = function(form){ 
-        if (madLibForm.$invalid){
+        if (form.$invalid){
           $scope.formInvalid = true;
-        } else {
-          console.log('hello');
           $scope.formSubmitted = true;
+          $scope.formValid = false;
+          console.log(madLibForm.$invalid);
+          console.log('Hey, it is not valid');
+        } else {
+          console.log('form is valid yo');
+          $scope.formInvalid = false;
+          $scope.formValid = true; // always needs tobe set to "true" like this
         }
        };
 
    		$scope.reset = function() {
+        console.log('reset bro')
         $scope.madLibForm.$setPristine();
+        $scope.formValid = false;
         $scope.formSubmitted = false;
+        $scope.formInvalid = false;
         $scope.data = {};
    		};
       
     }]);
-
-// <button class="btn btn-primary" type="reset" ng-click="captchaForm.$setPristine()">Reset</button>
-// <button type="submit" id="submit_button" class="btn btn-success btn-primary" ng-click="doSubmit(captchaForm)">
