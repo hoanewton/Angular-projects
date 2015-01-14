@@ -23,7 +23,7 @@
 
       <form name="madLibForm" novalidate  class="clearfix">
 
-        <input ng-model="data.personName"
+        <!-- <input ng-model="data.personName"
                type='text'
                name='personName'
                placeholder="personName"
@@ -74,7 +74,7 @@
         
         <p ng-show="madLibForm.adjective.$invalid && formSubmitted">
             Please enter an adjective</p>
-        
+         -->
         <input ng-model="data.hugeNumber"
                type='number'
                name='hugeNumber'
@@ -83,10 +83,10 @@
         <p ng-show="madLibForm.hugeNumber.$invalid && formSubmitted">
           Please enter a huge number.</p>
 
-        <div ng-init="data.gender='true'">
-          <input type="radio" ng-model="data.gender" name="name" value="true" required />Male
-          <input type="radio" ng-model="data.gender" name="name" value="false" required />Female
-        </div>
+        <!-- <div ng-init="data.gender='true'"> -->
+          <input type="radio" ng-model="data.gender" value="true"/>Male
+          <input type="radio" ng-model="data.gender" value="false"/>Female
+        <!-- </div> -->
 
         <button type="submit"
             class="submit"
@@ -97,7 +97,7 @@
 
     <div ng-show="formValid" class="col-md-12 paragraph-container">
       <h4 class="paragraph">
-      <strong>{{data.personName}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although {{data.gender? "he" : "she"}} loved parts of {{data.gender? "his" : "her"}} job, {{data.gender? "he" : "she"}} absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with {{data.gender? "his" : "her"}} life mentor <strong>{{data.celebrity}}</strong> who told {{data.gender? "his" : "her"}} to learn how to <strong>{{data.uselessSkill}}</strong> with General Assembly. General Assembly didn't offer a course on <strong>{{data.uselessSkill}}</strong> so {{data.gender? "he" : "she"}} studied programming instead. 
+      <strong>{{data.personName}}</strong> was a <strong>{{data.jobTitle}}</strong> who loved technology. Although {{data.gender ? "he" : "she"}} loved parts of {{data.gender? "his" : "her"}} job, {{data.gender? "he" : "she"}} absolutely hated  <strong>{{data.tediousTask}}</strong> and <strong>{{data.dirtyTask}}</strong>. So, <strong>{{data.name}}</strong> met with {{data.gender? "his" : "her"}} life mentor <strong>{{data.celebrity}}</strong> who told {{data.gender? "his" : "her"}} to learn how to <strong>{{data.uselessSkill}}</strong> with General Assembly. General Assembly didn't offer a course on <strong>{{data.uselessSkill}}</strong> so {{data.gender? "he" : "she"}} studied programming instead. 
 
       What a great decision! With {{data.gender? "his" : "her"}} new skills, <strong>{{data.name}}</strong> built a(n) {{data.adjective}} robot named <strong>{{data.obnoxiousCelebrity}}</strong> that not only loved <strong>{{data.dirtyTask}}</strong> but did it <strong>{{data.hugeNumber}}</strong> faster. 
       </h4>

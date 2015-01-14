@@ -2,7 +2,8 @@ angular.module('madLib', ['ngMessages'])
    .controller('MadLibCtrl',['$scope',function($scope) {
      $scope.formSubmitted = false;
      $scope.formInvalid = true;
-
+     $scope.gender = true;
+     
    		$scope.generateMadLib = function(form){ 
         if (form.$invalid){
           $scope.formInvalid = true;
@@ -20,9 +21,9 @@ angular.module('madLib', ['ngMessages'])
    		$scope.reset = function() {
         console.log('reset bro')
         $scope.madLibForm.$setPristine();
-        $scope.formValid = false;
-        $scope.formSubmitted = false;
-        $scope.formInvalid = false;
+        // $scope.formValid = false;
+        // $scope.formSubmitted = false;
+        // $scope.formInvalid = false;
         $scope.data = {};
         $scope.gender = true;
    		};
