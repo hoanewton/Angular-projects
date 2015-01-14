@@ -23,7 +23,7 @@
 
       <form name="madLibForm" novalidate  class="clearfix">
 
-        <!-- <input ng-model="data.personName"
+        <input ng-model="data.personName"
                type='text'
                name='personName'
                placeholder="personName"
@@ -74,7 +74,7 @@
         
         <p ng-show="madLibForm.adjective.$invalid && formSubmitted">
             Please enter an adjective</p>
-         -->
+        
         <input ng-model="data.hugeNumber"
                type='number'
                name='hugeNumber'
@@ -83,10 +83,12 @@
         <p ng-show="madLibForm.hugeNumber.$invalid && formSubmitted">
           Please enter a huge number.</p>
 
-        <div ng-init="data.gender='true'">
-          <input type="radio" ng-model="data.gender" value="male"/>Male
-          <input type="radio" ng-model="data.gender" value="female"/>Female
+        <div ng-init="data.gender='male'">
+          <input type="radio" ng-model="data.gender" value="male" name='gender' required/>Male
+          <input type="radio" ng-model="data.gender" value="female" name='gender' required/>Female
         </div>
+          <p ng-show="madLibForm.gender.$untouched && formSubmitted">
+          Please select a gender.</p>
 
         <button type="submit"
             class="submit"
