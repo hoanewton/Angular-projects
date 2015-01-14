@@ -1,6 +1,8 @@
 angular.module('madLib', ['ngMessages'])
    .controller('MadLibCtrl',['$scope',function($scope) {
      $scope.formInvalid = false;
+     $scope.formSubmitted = false;
+     // $scope.gender = true;
      
    		$scope.generateMadLib = function(form){ 
         if (form.$invalid){
@@ -23,6 +25,7 @@ angular.module('madLib', ['ngMessages'])
         $scope.formSubmitted = false;
         $scope.formInvalid = false;
         $scope.data = {};
+        $scope.gender = true;
    		};
       
     }]);

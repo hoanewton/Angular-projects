@@ -1,5 +1,9 @@
+body {
+	height: 900px;
+}
+
 .wrapper {
-	height: 768px;
+	height: 100%;
 	width: 715px;
 	margin: 20px auto;
 }
@@ -36,14 +40,18 @@
 }
 
 .words-container {
-	height: 215px;
+	height: 100%;
 	border: 2px solid grey;
 	border-top: 0;
 	padding: 10px;
 }
 
+form {
+	height: 100%;
+}
+
 .paragraph-container {
-	height: 400px;
+	height: 100%;
 	border: 2px solid grey;
 	border-top: 0;
 }
