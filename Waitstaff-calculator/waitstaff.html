@@ -10,26 +10,48 @@
 		
 		<form name='waitstaffForm' novalidate class="meal-details">
 			<div class="headings">Enter the Meal Details</div>
+
 			<div class="row">
 				<span class="pull-left details">Base Meal Price: $</span>
-				<input  ng-model="data.mealPrice" type='number' name='mealPrice' placeholder="0.00" class="left"></input>
-				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.number' ng-messages="waitstaffForm.mealPrice.$error.number"> Please enter a number! </span>
+				<input  ng-model="data.mealPrice" 
+								type='number' 
+                required
+								name='mealPrice' 
+								placeholder="0.00" 
+								class="left">
+				</input>
+				<span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row">
 				<span class="pull-left details">Tax Rate: %</span>
-				<input  ng-model="data.taxRate" type='number' name='taxRate' placeholder="8.00"  placeholder="0.00" class="left"></input>
-				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.number' ng-messages="waitstaffForm.taxRate.$error.number"> Please enter a number! </span>
+				<input  ng-model="data.taxRate" 
+								type='number' 
+                required
+								name='taxRate' 
+								placeholder="8.00"
+								class="left">
+				</input>
+        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row">
 				<span class="pull-left details">Tip Percentage: %</span>
-				<input ng-model="data.tipRate" placeholder="20.00" class="left"></input>
-				<span class="error" ng-if='waitstaffForm.$submitted && waitstaffForm.tipPercentage.$error.number' ng-messages="waitstaffForm.tipPercentage.$error.number"> Please enter a number! </span>
+				<input ng-model="data.tipRate" 
+							placeholder="20.00" 
+              required
+              type='number'
+              name='tipRate'
+							class="left">
+				</input>
+				<span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.tipRate.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.tipRate.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row pull-right">
-				<button class="btn btn-primary pull-left" type="submit"  ng-submit="submit(waitstaffForm)">Submit</button>
+				<button class="btn btn-primary pull-left" type="submit"  ng-click="submit(waitstaffForm)">Submit</button>
 				<button class="btn btn-primary pull-left" type="cancel">Cancel</button>
 			</div>
 
@@ -60,7 +82,7 @@
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Meal count</span>
-					<span class="left">{{mealCount = 0}}</span>
+					<span ng-model="data.mealCount" class="left">{{data.mealCount}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Average tip per meal</span>
