@@ -35,7 +35,7 @@ angular.module('madLib', ['ngMessages'])
         $scope.formSubmitted = false;
         $scope.formInvalid = true;
         $scope.data = {};
-        // $scope.gender = true;
+        $scope.data.gender = 'male';
    		};
       
     }]);
