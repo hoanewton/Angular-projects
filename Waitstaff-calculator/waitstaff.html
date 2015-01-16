@@ -6,7 +6,7 @@
 </head>
 <body ng-app="waitstaff">
 	<div class="wrapper" ng-controller="WaitstaffCtrl">
-	<h1>Waitstaff Calculator</h1>
+    <h1>Waitstaff Calculator</h1>
 		
 		<form name='waitstaffForm' novalidate class="meal-details">
 			<div class="headings">Enter the Meal Details</div>
@@ -20,8 +20,8 @@
 								placeholder="0.00" 
 								class="left">
 				</input>
-				<span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
-        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.mealPrice.$error.required'> Can't be blank! </span>
+				<span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row">
@@ -33,8 +33,8 @@
 								placeholder="8.00"
 								class="left">
 				</input>
-        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.number'> Please enter a number! </span>
-        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.taxRate.$error.required'> Can't be blank! </span>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.taxRate.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.taxRate.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row">
@@ -46,13 +46,13 @@
               name='tipRate'
 							class="left">
 				</input>
-				<span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.tipRate.$error.number'> Please enter a number! </span>
-        <span class="error" ng-show='waitstaffForm.$submitted && waitstaffForm.tipRate.$error.required'> Can't be blank! </span>
+				<span class="error" ng-show='formSubmitted && waitstaffForm.tipRate.$error.number'> Please enter a number! </span>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.tipRate.$error.required'> Can't be blank! </span>
 			</div>
 
 			<div class="row pull-right">
 				<button class="btn btn-primary pull-left" type="submit"  ng-click="submit(waitstaffForm)">Submit</button>
-				<button class="btn btn-primary pull-left" type="cancel">Cancel</button>
+				<button class="btn btn-primary pull-left" type="cancel" ng-click="cancel(waitstaffForm)">Cancel</button>
 			</div>
 
 		</form>
@@ -62,15 +62,15 @@
 				<div class="headings">Customer Charges</div>
 				<div class="row">
 					<span class="pull-left charges">Subtotal: </span>
-					<span placeholder="0.00" class="left"/>{{subTotal(data.mealPrice, data.taxRate)}}</span>
+					<span placeholder="0.00" class="left" ng-show="{{subTotal(data.mealPrice, data.taxRate)}} !== NaN"/>{{subTotal(data.mealPrice, data.taxRate)}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left charges">Tip: </span>
-					<span placeholder="0.00" class="left"/>{{ tipAmount( data.mealPrice, data.tipRate )}}</span>
+					<span placeholder="0.00" class="left" ng-hide="{{ tipAmount( data.mealPrice, data.tipRate )}} == NaN"/>{{ tipAmount( data.mealPrice, data.tipRate )}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left charges">Total:</span>
-					<span placeholder="0.00" class="left"/>{{total()}}</span>
+					<span placeholder="0.00" class="left" ng-hide="{{total()}} == NaN"/>{{total()}}</span>
 				</div>
 			</div>
 
@@ -82,7 +82,7 @@
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Meal count</span>
-					<span ng-model="data.mealCount" class="left">{{data.mealCount}}</span>
+					<span class="left">{{mealCount}}</span>
 				</div>
 				<div class="row">
 					<span class="pull-left earning">Average tip per meal</span>
@@ -91,7 +91,7 @@
 			</div>
 		</div>
 		<button class="reset btn btn-default">Reset</button>
-	</div>
+  </div>
 
 
 

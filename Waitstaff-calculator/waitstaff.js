@@ -6,19 +6,28 @@ angular.module('waitstaff', ['ngMessages'])
    	var tipAmount;
    	var subTotal;
    	var tipTotal;
-   	mealCount = 0;
+
+   	$scope.mealCount = 0;
+   	$scope.formValid = false;
+   	$scope.formSubmitted = false;
 
    	$scope.submit = function(form) {
-   			console.log('submitted');
-   		form.$submitted = true;
-   			console.log(form.$submitted);
-
+   		$scope.formSubmitted = true;
+   		
    		if (form.$valid) {
-   			mealCount += 1;
-   			console.log(mealCount);
+   			$scope.formValid = true;
+   			$scope.mealCount += 1;
+   			form.$setPristine();
+   			$scope.data = {};
+   			$scope.formSubmitted = false;
    		}
    	}
 
+   	$scope.cancel = function(form) {
+   			console.log('canceled');
+   			form.$setPristine();
+   			$scope.data = {};
+   	}
 
    	$scope.taxAmount = function(price, taxPercentage) {
    		return price * taxPercentage / 100;
