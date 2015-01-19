@@ -22,7 +22,7 @@
                 ng-change="calculateSubtotal()">
         </input>
         <span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
-        <span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.required'> Can't be blank! </span>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.$pristine'> Can't be blank! </span>
       </div>
 
       <div class="row">
@@ -81,7 +81,7 @@
         <div class="headings">My earning</div>
         <div class="row">
           <span class="pull-left earning">Tip total</span>
-          <span class="left">{{tipTotal = 0}}</span>
+          <span class="left">{{tipTotal}}</span>
         </div>
         <div class="row">
           <span class="pull-left earning">Meal count</span>
@@ -89,11 +89,11 @@
         </div>
         <div class="row">
           <span class="pull-left earning">Average tip per meal</span>
-          <span class="left"></span>
+          <span class="left">{{averageTipPerMeal}}</span>
         </div>
       </div>
     </div>
-    <button class="reset btn btn-default">Reset</button>
+    <button class="reset btn btn-default" ng-click="reset()">Reset</button>
   </div>
 
 
