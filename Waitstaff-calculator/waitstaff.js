@@ -1,15 +1,22 @@
 angular.module('waitstaff', ['ngMessages'])
    .controller('WaitstaffCtrl', ['$scope', function($scope) {
+      
+    $scope.setDefaultForm = function(){
+      $scope.data = {
+        mealPrice: 0,
+        taxRate: 0,
+        tipRate: 0
+      }
+    }(),
+   	
 
-   	var price;
-   	var taxAmount;
-   	var tipAmount;
-   	var subTotal;
-   	var tipTotal;
-
-   	$scope.mealCount = 0;
-   	$scope.formValid = false;
-   	$scope.formSubmitted = false;
+   	$scope.mealCount = 0,
+   	$scope.formValid = false,
+   	$scope.formSubmitted = false,
+    $scope.subTotal = 0,
+    $scope.tipAmount = 0,
+    $scope.taxAmount = 0,
+    $scope.total = 0,
 
    	$scope.submit = function(form) {
    		$scope.formSubmitted = true;
@@ -18,31 +25,41 @@ angular.module('waitstaff', ['ngMessages'])
    			$scope.formValid = true;
    			$scope.mealCount += 1;
    			form.$setPristine();
-   			$scope.data = {};
+        $scope.setDefaultForm;
    			$scope.formSubmitted = false;
    		}
-   	}
+   	},
 
    	$scope.cancel = function(form) {
    			console.log('canceled');
    			form.$setPristine();
-   			$scope.data = {};
-   	}
-
-   	$scope.taxAmount = function(price, taxPercentage) {
-   		return price * taxPercentage / 100;
+   			$scope.setDefaultForm();
    	},
+
+//    	$scope.taxAmount = function(price, taxPercentage) {
+//    		return price * taxPercentage / 100;
+//    	},
 
    	$scope.tipAmount = function(price, tipPercentage) {
    		return tipAmount = price * tipPercentage / 100;
    	},
 
-   	$scope.subTotal = function(price, taxPercentage) {
-   		return subTotal = ((price * taxPercentage / 100) + price);
+   	$scope.calculateSubtotal = function() {
+   		$scope.subTotal = (($scope.data.mealPrice * $scope.data.taxRate / 100) +               $scope.data.mealPrice);
+       $scope.calculateTotal();
    	},
+      
+    $scope.calculateTaxAmount = function() {
+      $scope.taxAmount = $scope.data.mealPrice * $scope.data.taxRate / 100;
+    },
+      
+    $scope.calculateTipAmount = function() {
+      $scope.tipAmount = $scope.data.mealPrice * $scope.data.tipRate / 100;
+      $scope.calculateTotal();
+    },
 
-   	$scope.total = function() {
-   		return subTotal + tipAmount;
+   	$scope.calculateTotal = function() {
+   		  $scope.total = $scope.subTotal + $scope.tipAmount;
    	},
 
    	$scope.tipTotal = function() {

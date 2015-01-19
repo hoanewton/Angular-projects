@@ -1,96 +1,99 @@
 <html>
 <head>
-	<title>Waitstaff Calculator</title>
-	<link rel="stylesheet" type="text/css" href="waitstaff.css">
-	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
+  <title>Waitstaff Calculator</title>
+  <link rel="stylesheet" type="text/css" href="waitstaff.css">
+  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body ng-app="waitstaff">
-	<div class="wrapper" ng-controller="WaitstaffCtrl">
+  <div class="wrapper" ng-controller="WaitstaffCtrl">
     <h1>Waitstaff Calculator</h1>
-		
-		<form name='waitstaffForm' novalidate class="meal-details">
-			<div class="headings">Enter the Meal Details</div>
+    
+    <form name='waitstaffForm' novalidate class="meal-details">
+      <div class="headings">Enter the Meal Details</div>
 
-			<div class="row">
-				<span class="pull-left details">Base Meal Price: $</span>
-				<input  ng-model="data.mealPrice" 
-								type='number' 
+      <div class="row">
+        <span class="pull-left details">Base Meal Price: $</span>
+        <input  ng-model="data.mealPrice" 
+                type='number' 
                 required
-								name='mealPrice' 
-								placeholder="0.00" 
-								class="left">
-				</input>
-				<span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
+                name='mealPrice' 
+                placeholder="0.00" 
+                class="left"
+                ng-change="calculateSubtotal()">
+        </input>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.number'> Please enter a number! </span>
         <span class="error" ng-show='formSubmitted && waitstaffForm.mealPrice.$error.required'> Can't be blank! </span>
-			</div>
+      </div>
 
-			<div class="row">
-				<span class="pull-left details">Tax Rate: %</span>
-				<input  ng-model="data.taxRate" 
-								type='number' 
+      <div class="row">
+        <span class="pull-left details">Tax Rate: %</span>
+        <input  ng-model="data.taxRate" 
+                type='number' 
                 required
-								name='taxRate' 
-								placeholder="8.00"
-								class="left">
-				</input>
+                name='taxRate' 
+                placeholder="8.00"
+                class="left"
+                ng-change="calculateTaxAmount()">
+        </input>
         <span class="error" ng-show='formSubmitted && waitstaffForm.taxRate.$error.number'> Please enter a number! </span>
         <span class="error" ng-show='formSubmitted && waitstaffForm.taxRate.$error.required'> Can't be blank! </span>
-			</div>
+      </div>
 
-			<div class="row">
-				<span class="pull-left details">Tip Percentage: %</span>
-				<input ng-model="data.tipRate" 
-							placeholder="20.00" 
+      <div class="row">
+        <span class="pull-left details">Tip Percentage: %</span>
+        <input ng-model="data.tipRate" 
+              placeholder="20.00" 
               required
               type='number'
               name='tipRate'
-							class="left">
-				</input>
-				<span class="error" ng-show='formSubmitted && waitstaffForm.tipRate.$error.number'> Please enter a number! </span>
+              class="left"
+              ng-change="calculateTipAmount()">
+        </input>
+        <span class="error" ng-show='formSubmitted && waitstaffForm.tipRate.$error.number'> Please enter a number! </span>
         <span class="error" ng-show='formSubmitted && waitstaffForm.tipRate.$error.required'> Can't be blank! </span>
-			</div>
+      </div>
 
-			<div class="row pull-right">
-				<button class="btn btn-primary pull-left" type="submit"  ng-click="submit(waitstaffForm)">Submit</button>
-				<button class="btn btn-primary pull-left" type="cancel" ng-click="cancel(waitstaffForm)">Cancel</button>
-			</div>
+      <div class="row pull-right">
+        <button class="btn btn-primary pull-left" type="submit"  ng-click="submit(waitstaffForm)">Submit</button>
+        <button class="btn btn-primary pull-left" type="cancel" ng-click="cancel(waitstaffForm)">Cancel</button>
+      </div>
 
-		</form>
+    </form>
 
-		<div class="calculator">
-			<div class="customer-charges">
-				<div class="headings">Customer Charges</div>
-				<div class="row">
-					<span class="pull-left charges">Subtotal: </span>
-					<span placeholder="0.00" class="left" ng-show="{{subTotal(data.mealPrice, data.taxRate)}} !== NaN"/>{{subTotal(data.mealPrice, data.taxRate)}}</span>
-				</div>
-				<div class="row">
-					<span class="pull-left charges">Tip: </span>
-					<span placeholder="0.00" class="left" ng-hide="{{ tipAmount( data.mealPrice, data.tipRate )}} == NaN"/>{{ tipAmount( data.mealPrice, data.tipRate )}}</span>
-				</div>
-				<div class="row">
-					<span class="pull-left charges">Total:</span>
-					<span placeholder="0.00" class="left" ng-hide="{{total()}} == NaN"/>{{total()}}</span>
-				</div>
-			</div>
+    <div class="calculator">
+      <div class="customer-charges">
+        <div class="headings">Customer Charges</div>
+        <div class="row">
+          <span class="pull-left charges">Subtotal: </span>
+          <span class="left"/>{{subTotal}}</span>
+        </div>
+        <div class="row">
+          <span class="pull-left charges">Tip: </span>
+          <span class="left"/>{{ tipAmount }}</span>
+        </div>
+        <div class="row">
+          <span class="pull-left charges">Total:</span>
+          <span class="left"/>{{total}}</span>
+        </div>
+      </div>
 
-			<div class="my-earning">
-				<div class="headings">My earning</div>
-				<div class="row">
-					<span class="pull-left earning">Tip total</span>
-					<span class="left">{{tipTotal = 0}}</span>
-				</div>
-				<div class="row">
-					<span class="pull-left earning">Meal count</span>
-					<span class="left">{{mealCount}}</span>
-				</div>
-				<div class="row">
-					<span class="pull-left earning">Average tip per meal</span>
-					<span class="left"></span>
-				</div>
-			</div>
-		</div>
-		<button class="reset btn btn-default">Reset</button>
+      <div class="my-earning">
+        <div class="headings">My earning</div>
+        <div class="row">
+          <span class="pull-left earning">Tip total</span>
+          <span class="left">{{tipTotal = 0}}</span>
+        </div>
+        <div class="row">
+          <span class="pull-left earning">Meal count</span>
+          <span class="left">{{mealCount}}</span>
+        </div>
+        <div class="row">
+          <span class="pull-left earning">Average tip per meal</span>
+          <span class="left"></span>
+        </div>
+      </div>
+    </div>
+    <button class="reset btn btn-default">Reset</button>
   </div>
 
 
