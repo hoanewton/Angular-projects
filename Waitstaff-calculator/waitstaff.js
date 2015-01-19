@@ -7,8 +7,8 @@ angular.module('waitstaff', ['ngMessages'])
         taxRate: 0,
         tipRate: 0
       }
-    }(),
-   	
+    },
+   	$scope.setDefaultForm(),
 
    	$scope.mealCount = 0,
    	$scope.formValid = false,
@@ -17,6 +17,8 @@ angular.module('waitstaff', ['ngMessages'])
     $scope.tipAmount = 0,
     $scope.taxAmount = 0,
     $scope.total = 0,
+    $scope.tipTotal = 0,
+    $scope.averageTipPerMeal = 0,
 
    	$scope.submit = function() {
    		$scope.formSubmitted = true;
@@ -25,23 +27,17 @@ angular.module('waitstaff', ['ngMessages'])
    			$scope.formValid = true;
    			$scope.mealCount += 1;
    			$scope.waitstaffForm.$setPristine();
-        $scope.setDefaultForm;
+        $scope.setDefaultForm();
    			$scope.formSubmitted = false;
+
+   			$scope.calculateTipTotal();
+   			$scope.calculateAverageTipPerMeal();
    		}
    	},
 
-   	// $scope.returnValues = function (inputValue) {
-   	// 	if ($scope.waitstaffForm.$invalid) {
-   	// 		return 0;
-   	// 	} else {
-   	// 		return inputValue;
-   	// 	}
-   	// }
-
    	$scope.cancel = function() {
-   			console.log('canceled');
-   			$scope.waitstaffForm.$setPristine();
-   			$scope.setDefaultForm();
+ 			$scope.waitstaffForm.$setPristine();
+ 			$scope.setDefaultForm();
    	},
 
    	$scope.calculateSubtotal = function() {
@@ -72,8 +68,12 @@ angular.module('waitstaff', ['ngMessages'])
    		  $scope.total = $scope.subTotal + $scope.tipAmount;
    	},
 
-   	$scope.tipTotal = function() {
+   	$scope.calculateTipTotal = function() {
    		return $scope.tipTotal += $scope.tipAmount;
+   	},
+
+   	$scope.calculateAverageTipPerMeal = function () {
+   		return $scope.averageTipPerMeal = $scope.tipTotal / $scope.mealCount;
    	}
 
 
