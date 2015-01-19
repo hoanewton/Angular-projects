@@ -65,15 +65,15 @@
         <div class="headings">Customer Charges</div>
         <div class="row">
           <span class="pull-left charges">Subtotal: </span>
-          <span class="left"/>{{subTotal}}</span>
+          <span class="left"/>{{calculateSubtotal()}}</span>
         </div>
         <div class="row">
           <span class="pull-left charges">Tip: </span>
-          <span class="left"/>{{ tipAmount }}</span>
+          <span class="left"/>{{ calculateTipAmount()}}</span>
         </div>
         <div class="row">
           <span class="pull-left charges">Total:</span>
-          <span class="left"/>{{total}}</span>
+          <span class="left"/>{{ total }}</span>
         </div>
       </div>
 

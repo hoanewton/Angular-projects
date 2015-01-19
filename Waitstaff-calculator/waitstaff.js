@@ -18,35 +18,40 @@ angular.module('waitstaff', ['ngMessages'])
     $scope.taxAmount = 0,
     $scope.total = 0,
 
-   	$scope.submit = function(form) {
+   	$scope.submit = function() {
    		$scope.formSubmitted = true;
    		
-   		if (form.$valid) {
+   		if ($scope.waitstaffForm.$valid) {
    			$scope.formValid = true;
    			$scope.mealCount += 1;
-   			form.$setPristine();
+   			$scope.waitstaffForm.$setPristine();
         $scope.setDefaultForm;
    			$scope.formSubmitted = false;
    		}
    	},
 
-   	$scope.cancel = function(form) {
+   	// $scope.returnValues = function (inputValue) {
+   	// 	if ($scope.waitstaffForm.$invalid) {
+   	// 		return 0;
+   	// 	} else {
+   	// 		return inputValue;
+   	// 	}
+   	// }
+
+   	$scope.cancel = function() {
    			console.log('canceled');
-   			form.$setPristine();
+   			$scope.waitstaffForm.$setPristine();
    			$scope.setDefaultForm();
    	},
 
-//    	$scope.taxAmount = function(price, taxPercentage) {
-//    		return price * taxPercentage / 100;
-//    	},
-
-   	$scope.tipAmount = function(price, tipPercentage) {
-   		return tipAmount = price * tipPercentage / 100;
-   	},
-
    	$scope.calculateSubtotal = function() {
-   		$scope.subTotal = (($scope.data.mealPrice * $scope.data.taxRate / 100) +               $scope.data.mealPrice);
-       $scope.calculateTotal();
+      $scope.calculateTotal();
+   		
+   		if ($scope.waitstaffForm.$invalid) {
+   			return 0;
+   		} else {
+   			return $scope.subTotal = (($scope.data.mealPrice * $scope.data.taxRate / 100) + $scope.data.mealPrice);
+   		}
    	},
       
     $scope.calculateTaxAmount = function() {
@@ -54,8 +59,13 @@ angular.module('waitstaff', ['ngMessages'])
     },
       
     $scope.calculateTipAmount = function() {
-      $scope.tipAmount = $scope.data.mealPrice * $scope.data.tipRate / 100;
-      $scope.calculateTotal();
+	      $scope.calculateTotal();
+
+      if ($scope.waitstaffForm.$invalid) {
+   			return 0;
+   		} else {
+   			return $scope.tipAmount = $scope.data.mealPrice * $scope.data.tipRate / 100;
+   		}
     },
 
    	$scope.calculateTotal = function() {
@@ -63,7 +73,7 @@ angular.module('waitstaff', ['ngMessages'])
    	},
 
    	$scope.tipTotal = function() {
-   		return tipTotal = tipTotal + tipAmount;
+   		return $scope.tipTotal += $scope.tipAmount;
    	}
 
 
